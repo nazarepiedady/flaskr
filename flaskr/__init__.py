@@ -7,7 +7,7 @@ def create_application(test_config=None):
     application = Flask(__name__, instance_relative_config=True)
     application.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        DATABASE=os.path.join(application.instance_path, 'flaskr.sqlite'),
     )
 
     if test_config is None:
@@ -28,4 +28,4 @@ def create_application(test_config=None):
     def hello():
         return 'Hello, World!'
 
-    return
+    return application
