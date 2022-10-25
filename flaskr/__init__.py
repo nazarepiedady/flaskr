@@ -2,7 +2,7 @@ import os
 from flask import Flask
 
 
-def create_application(test_config=None):
+def create_app(test_config=None):
     ''' create and configure the application '''
     application = Flask(__name__, instance_relative_config=True)
     application.config.from_mapping(
