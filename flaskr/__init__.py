@@ -23,6 +23,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from . import db as database
+    database.init_application(application)
+
     # a simple page that says hello
     @application.route('/hello')
     def hello():
