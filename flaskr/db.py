@@ -15,14 +15,24 @@ def get_database():
 
     return g.db
 
+
 def close_database(e=None):
     db = g.pop('db', None)
 
     if db is not None:
         db.close()
 
+
 def init_database():
     db = get_database()
 
     with current_app.open_resource('schema.sql') as file:
         db.executescript(file.read().decode('utf8'))
+
+
+@click.command('init-db')
+@with_appcontext
+def init_database_command():
+    '''Clear the existing data and create new tables.'''
+    init_database()
+    click.echo('Initialised the database.')
