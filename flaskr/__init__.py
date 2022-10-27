@@ -26,6 +26,9 @@ def create_app(test_config=None):
     from . import db as database
     database.init_application(application)
 
+    from . import auth as authentication
+    application.register_blueprint(authentication.blueprint)
+
     # a simple page that says hello
     @application.route('/hello')
     def hello():
