@@ -38,6 +38,7 @@ def register():
         flash(error)
     return render_template('auth/register.html')
 
+
 @blueprint.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -63,6 +64,7 @@ def login():
 
     return render_template('auth/login.html')
 
+
 @blueprint.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -74,10 +76,12 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+
 @blueprint.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 
 def login_required(view):
     @functools.wraps(view)
