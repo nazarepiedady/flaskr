@@ -60,3 +60,31 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
+
+@blueprint.route('/<int:id>/update', methods=('GET', 'POST'))
+@login_required
+def update(id):
+    post = get_post(id)
+
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        error = None
+
+        if not title:
+            error = 'Title is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            database = get_database()
+            database.execute(
+                'UPDATE post SET title = ?, body = ?'
+                ' WHERE id = ?',
+                (title, body, id)
+            )
+            database.commit()
+            return redirect(url_for('blog.index'))
+
+    return render_template('blog/update.html', post=post)
