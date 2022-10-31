@@ -32,6 +32,8 @@ def create_app(test_config=None):
     from . import blog
     application.register_blueprint(blog.blueprint)
 
+    application.add_url_rule('/', endpoint='index')
+
     # a simple page that says hello
     @application.route('/hello')
     def hello():
