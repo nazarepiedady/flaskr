@@ -44,3 +44,19 @@ def create():
             return redirect(url_for('blog.index'))
 
     return render_template('blog/create.html')
+
+
+def get_post(id, check_author=True):
+    post = get_database().execute(
+        'SELECT post.id, title, body, created, author_id, username'
+        ' WHERE post.id = ?',
+        (id,)
+    ).fetchone()
+
+    if post is None:
+        abort(404, f'Post id {id} does not exist.')
+
+    if check_author and post['author_id'] != g.user['id']:
+        abort(403)
+
+    return post
