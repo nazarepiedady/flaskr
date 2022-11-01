@@ -22,6 +22,7 @@ def index():
 
 
 @blueprint.route('/create')
+@login_required
 def create():
     if request.method == 'POST':
         title = request.form['title']
