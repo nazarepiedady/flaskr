@@ -27,3 +27,8 @@ def application():
 
     os.close(database_file_directory)
     os.unlink(database_path)
+
+
+@pytest.fixture
+def client(application):
+    return application.test_client()
