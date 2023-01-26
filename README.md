@@ -7,22 +7,34 @@ so below you will find some instructions to run and test it.
 
 ## Instructions
 
-To run this project you need to:
+To run this application you need to:
 
 1 - Create the python virtual environment and activate it:
 
 ```sh
-python -m venv venv && source venv/bin/activate
+python -m venv venv
 ```
 
-2 - Install the packages in the `requirements.txt`:
+2 - Activate the virtual environment
+
+```sh
+source venv/bin/activate
+```
+
+3 - Install the packages in the `requirements.txt`:
 
 ```sh
 pip install -r requirements.txt
 ```
 
-3 - Initialise the database file
+4 - Initialise the sqlite3 database
 
 ```sh
 flask --app flaskr init-db
+```
+
+5 - Start the development server
+
+```sh
+flask --app flaskr run
 ```
