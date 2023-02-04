@@ -47,5 +47,14 @@ def test_login(client, authentication):
     ('test', 'a', b'Incorrect password.'),
 ))
 def test_login_validate_input(authentication, username, password, message):
+    ''' test the login validate input '''
     response = authentication.login(username, password)
     assert message in response.data
+
+def test_logout(client, authentication):
+    ''' test the logout '''
+    authentication.login()
+
+    with client:
+        authentication.logout()
+        assert 'user_id' not in session
