@@ -4,7 +4,7 @@ from flaskr.db import get_database
 
 
 def test_register(client, application):
-    ''' test the register route path '''
+    ''' test the register '''
     login_route_path = '/auth/login'
     register_route_path = '/auth/register'
     user = {'username': 'a', 'password': 'a'}
@@ -30,3 +30,14 @@ def test_register_validate_input(client, username, password, message):
         data={'username': username, 'password': password}
     )
     assert message in response.data
+
+def test_login(client, authentication):
+    ''' test the login '''
+    response = authentication.login()
+    assert client.get('/auth/login').status_code == 200
+    assert response.headers['Location'] == '/'
+
+    with client:
+        client.get('/')
+        assert session['user_id'] == 1
+        assert g.user['username'] == 'test'
