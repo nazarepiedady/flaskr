@@ -14,3 +14,15 @@ def test_get_close_db(application):
         database.execute('SELECT 1')
 
     assert 'closed' in str(error.value)
+
+def test_init_db_command(runner, monkeypatch):
+    class Recorder(object):
+        called = False
+
+    def fake_init_db():
+        Recorder.called = True
+
+    monkeypatch.setattr('flaskr.db.init_database', fake_init_db)
+    result = runner.invoke(args=['init-db'])
+    assert 'Database Initialized' in result.output
+    assert Recorder.called
