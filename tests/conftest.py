@@ -12,6 +12,7 @@ with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as file:
 
 @pytest.fixture
 def application():
+    ''' application fixture '''
     database_file_descriptor, database_path = tempfile.mkstemp()
 
     application = create_app({
@@ -31,9 +32,11 @@ def application():
 
 @pytest.fixture
 def client(application):
+    ''' client fixture '''
     return application.test_client()
 
 
 @pytest.fixture
 def runner(application):
+    ''' runner fixture '''
     return application.test_cli_runner()
