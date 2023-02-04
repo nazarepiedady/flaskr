@@ -16,6 +16,7 @@ def test_get_close_db(application):
     assert 'closed' in str(error.value)
 
 def test_init_db_command(runner, monkeypatch):
+    ''' test the initialize database command '''
     class Recorder(object):
         called = False
 
