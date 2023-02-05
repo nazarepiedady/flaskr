@@ -57,3 +57,12 @@ def test_create(client, authentication, application):
         count = database.execute('SELECT COUNT(id) FROM post').fetchone()[0]
         assert count == 2
 
+def test_update(client, authentication, application):
+    authentication.login()
+    assert client.get('/1/update').status_code == 200
+    client.post('/1/update', data={'title': 'updated', 'body': ''})
+
+    with application.app_context():
+        database = get_database()
+        post = database.execute('SELECT * FROM post WHERE id = 1').fetchone()
+        assert post['title'] == 'updated'
