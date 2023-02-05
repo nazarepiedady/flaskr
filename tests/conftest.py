@@ -7,7 +7,7 @@ from flaskr.db import get_database, init_database
 
 
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as file:
-    __data_sql = file.read().decode('utf-8')
+    _data_sql = file.read().decode('utf-8')
 
 
 @pytest.fixture
@@ -22,7 +22,7 @@ def application():
 
     with application.app_context():
         init_database()
-        get_database().executescript(__data_sql)
+        get_database().executescript(_data_sql)
 
     yield application
 
