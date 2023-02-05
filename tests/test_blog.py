@@ -46,3 +46,14 @@ def test_author_required(application, client, authentication):
 def test_exists_required(client, authentication, path):
     authentication.login()
     assert client.post(path).status_code == 404
+
+def test_create(client, authentication, application):
+    authentication.login()
+    assert client.get('/create').status_code == 200
+    client.post('/create', data={'title': 'created', 'body': ''})
+
+    with application.app_context():
+        database = get_database()
+        count = database.execute('SELECT COUNT(id) FROM post').fetchone()[0]
+        assert count == 2
+
