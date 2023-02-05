@@ -50,6 +50,7 @@ def create():
 def get_post(id, check_author=True):
     post = get_database().execute(
         'SELECT post.id, title, body, created, author_id, username'
+        ' FROM post JOIN user ON post.author_id = user.id'
         ' WHERE post.id = ?',
         (id,)
     ).fetchone()
