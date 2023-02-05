@@ -33,7 +33,31 @@ pip install -r requirements.txt
 flask --app flaskr init-db
 ```
 
-5 - Start the development server
+5 - Run the tests
+
+```sh
+pytest
+```
+
+To measure the code coverage of the tests, run:
+
+```sh
+coverage run -m pytest
+```
+
+To generate the reports, run:
+
+```sh
+coverage report
+```
+
+To extract the reports as HTML, run:
+
+```sh
+coverage html
+```
+
+6 - Start the development server
 
 ```sh
 flask --app flaskr run
