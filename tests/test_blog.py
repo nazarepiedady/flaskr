@@ -66,3 +66,12 @@ def test_update(client, authentication, application):
         database = get_database()
         post = database.execute('SELECT * FROM post WHERE id = 1').fetchone()
         assert post['title'] == 'updated'
+
+@pytest.mark.parametrize('path', (
+    '/create',
+    '/1/update',
+))
+def test_create_update_validate(client, authentication, path):
+    authentication.login()
+    response = client.post(path, data={'title': '', 'body': ''})
+    assert b'Title is required.' in response.data
