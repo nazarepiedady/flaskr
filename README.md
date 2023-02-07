@@ -39,6 +39,12 @@ flask --app flaskr init-db
 pytest
 ```
 
+To run the test doing the pytest to show the tested functions:
+
+```sh
+pytest -v
+```
+
 To measure the code coverage of the tests, run:
 
 ```sh
