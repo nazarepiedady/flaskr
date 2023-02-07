@@ -66,5 +66,5 @@ coverage html
 6 - Start the development server
 
 ```sh
-flask --app flaskr run
+flask --app flaskr --debug run
 ```
